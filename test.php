@@ -1,8 +1,8 @@
 <?php 
-use Skaisser\Monetizze\Monetizze;
+use Skaisser\Monetizze;
 
 include 'vendor/autoload.php';
 
-$monetizze = new Monetizze('');
-$detalhesPedido = $monetizze->getSpecificTransaction(6170708);
-var_dump($detalhesPedido);
+$monetizze = new Monetizze('SUA_API_KEY_MONETIZZE');
+// Buscar uma transacao por id!
+$detalhesPedido = $monetizze->getSpecificTransaction(id_transacao);
