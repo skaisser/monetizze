@@ -86,7 +86,7 @@ Creditos
 Suporte
 -------
 
-[Para reportar um novo bug por favor abra um novo Issue no github](https://github.com/skaisser/monetize/issues)
+[Para reportar um novo bug por favor abra um novo Issue no github](https://github.com/skaisser/monetizze/issues)
 
 
 Licença
