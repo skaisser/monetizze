@@ -13,14 +13,14 @@ composer require skaisser/monetizze
 ```
 
 
-Exemplo
+Iniciando o SDK
 -------
 
 ```php
 <?php
 include 'vendor/autoload.php';
 
-use Skaisser\Monetizze\Monetizze;
+use Skaisser\Monetizze;
 
 
 $monetizze = new Monetizze('SUA_API_KEY_MONETIZZE');
@@ -43,7 +43,7 @@ Transaçoes por Clientes
 
 ```php
 // Buscar Transacoes por E-mail
-$transacoes = $monetizze->getTransactionsByCustomerEmail("email@cliente.com");
+$transacoes = $monetizze->getTransactionsByEmail("email@cliente.com");
 
 ```
 
@@ -52,7 +52,7 @@ Boletos
 ------------
 
 ```php
-// Altera o Vencimento de Um Boleto pela transação
+// Altera o Vencimento de Um Boleto de uma transação Especifica
 $boleto = $monetizze->changeBoletoDueDate(123456, '2018-06-01');
 
 ```
@@ -74,13 +74,14 @@ $monetizze->addCorreiosTrackingNumber(123456, 'PA123456789BR');
 Documentação Oficial
 --------------------
 
-Obs.: Esta é uma API não oficial. Foi feita com base na documentação disponibilizada [neste link](https://api.monetizze.com.br/2.1/apidoc/#api-Produtor-Tracking).
+Obs.: Esta é uma API não oficial. Foi feita com base na documentação disponibilizada [neste link](https://api.monetizze.com.br/2.1/apidoc).
 
 
 Creditos
 --------
 
 * [Kapsula](http://www.kapsula.com.br)
+* [Grupo KPG](http://www.grupokpg.com)
 
 Suporte
 -------
