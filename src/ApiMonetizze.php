@@ -5,7 +5,7 @@ namespace Skaisser\Monetizze;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class Monetizze
+class ApiMonetizze
 {
     const API_URL = 'https://api.monetizze.com.br/2.1/';
 

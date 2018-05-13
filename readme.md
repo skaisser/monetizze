@@ -23,7 +23,7 @@ include 'vendor/autoload.php';
 use Skaisser\Monetizze;
 
 
-$monetizze = new Monetizze('SUA_API_KEY_MONETIZZE');
+$monetizze = new ApiMonetizze('SUA_API_KEY_MONETIZZE');
 
 ```
 
