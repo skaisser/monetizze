@@ -20,7 +20,7 @@ Iniciando o SDK
 <?php
 include 'vendor/autoload.php';
 
-use Skaisser\Monetizze;
+use Skaisser\Monetizze\ApiMonetizze;
 
 
 $monetizze = new ApiMonetizze('SUA_API_KEY_MONETIZZE');
