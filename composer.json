@@ -1,0 +1,26 @@
+{
+    "name": "skaisser/monetizze",
+    "description": "PHP-SDK para consumo da Api da Monetizze",
+    "keywords": [
+        "monetizze",
+        "api monetizze"
+    ],
+    "type": "package",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shirleyson Kaisser",
+            "email": "skaisser@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Skaisser\\Monetizze\\": "src/"
+        }
+    },
+    "version": "1.0.0",
+    "minimum-stability": "dev"
+}
