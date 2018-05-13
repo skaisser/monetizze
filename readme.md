@@ -34,7 +34,6 @@ Transacoes
 // Pegar detalhes de uma transação especifica
 $detalhesTransacao = $monetizze->getSpecificTransaction(12312312);
 
-
 ```
 
 
