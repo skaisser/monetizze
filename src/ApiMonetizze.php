@@ -38,7 +38,7 @@ class ApiMonetizze
         }
     }
 
-    public function getSpecificTransaction($transactionId)
+    public function getTransactionDetails($transactionId)
     {
         // First Lets Authenticate
         $token = $this->authenticate();
@@ -46,12 +46,9 @@ class ApiMonetizze
         try {
             $data = [
                 'headers' => ['TOKEN' => $token],
-                'json' => [
                 'form_params' => ['transaction' => $transactionId]
-            ]];
-            var_dump($data);
-            die();
-            $response = $this->client->request('POST', 'transactions', $data);
+            ];
+            $response = $this->client->get('transactions', $data);
             return json_decode($response->getBody()->getContents());
         } catch (RequestException $e) {
             $response = $this->statusCodeHandling($e);
@@ -61,6 +58,8 @@ class ApiMonetizze
 
     protected function statusCodeHandling($e)
     {
+        var_dump($e);
+        die();
         $response = [
             'statuscode' => $e->getResponse()->getStatusCode(),
             'error' => json_decode($e->getResponse()->getBody(true)->getContents())

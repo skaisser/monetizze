@@ -31,8 +31,8 @@ Transacoes
 --------
 
 ```php
-// Pegar detalhes de uma transação especifica
-$detalhesTransacao = $monetizze->getSpecificTransaction(12312312);
+// Pegar detalhes de uma transação especifica pelo id da transação
+$detalhesTransacao = $monetizze->getTransactionDetails(12312312);
 
 ```
 
