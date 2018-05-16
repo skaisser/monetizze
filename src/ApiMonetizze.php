@@ -46,9 +46,8 @@ class ApiMonetizze
         try {
             $data = [
                 'headers' => ['TOKEN' => $token],
-                'form_params' => ['transaction' => $transactionId]
             ];
-            $response = $this->client->get('transactions', $data);
+            $response = $this->client->get("transactiondetail?transaction_code=$transactionId", $data);
             return json_decode($response->getBody()->getContents());
         } catch (RequestException $e) {
             $response = $this->statusCodeHandling($e);
@@ -58,8 +57,6 @@ class ApiMonetizze
 
     protected function statusCodeHandling($e)
     {
-        var_dump($e);
-        die();
         $response = [
             'statuscode' => $e->getResponse()->getStatusCode(),
             'error' => json_decode($e->getResponse()->getBody(true)->getContents())
