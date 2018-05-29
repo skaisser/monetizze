@@ -24,6 +24,10 @@ class ApiMonetizze
         $this->apiKey = $apiKey;
     }
 
+    /**
+     * Sets $token protected Value.
+     * @return  Token $token
+     */
     protected function authenticate()
     {
         try {
@@ -38,11 +42,14 @@ class ApiMonetizze
         }
     }
 
+    /**
+     * Get The transaction details by the transaction id
+     * @param  int $transactionId Monetizze Transaction Id
+     * @return array                Result
+     */
     public function getTransactionDetails($transactionId)
     {
-        // First Lets Authenticate
         $token = $this->authenticate();
-        // Now Lets Grab The Specific Transaction
         try {
             $data = [
                 'headers' => ['TOKEN' => $token],
@@ -55,6 +62,75 @@ class ApiMonetizze
         }
     }
 
+    /**
+     * Get Transactions from Customer E-mail
+     * @param  string $email The Customer E-mail Address
+     * @return array        results
+     */
+    public function getTransactionsByEmail($email)
+    {
+        $token = $this->authenticate();
+        try {
+            $data = [
+                'headers' => ['TOKEN' => $token],
+            ];
+            $response = $this->client->get("transactions?email=$email", $data);
+            return json_decode($response->getBody()->getContents());
+        } catch (RequestException $e) {
+            $response = $this->statusCodeHandling($e);
+            return $response;
+        }
+    }
+
+    /**
+     * Add Tracking number of Correios Company to a Specific Transaction
+     * @param int $transaction  The Monetizze Transaction Code
+     * @param string $trackingCode The Correios Tracking Number
+     */
+    public function addCorreiosTrackingNumber($transaction, $trackingCode)
+    {
+        $token = $this->authenticate();
+        try {
+            $data = [
+                'headers' => ['TOKEN' => $token],
+                'form_params' => ['data' => json_encode([['codLog' => 1, 'transaction' => $transaction, 'trackingCode' => $trackingCode]])],
+            ];
+            $response = $this->client->post('sales/tracking', $data);
+            return json_decode($response->getBody()->getContents());
+        } catch (RequestException $e) {
+            $response = $this->statusCodeHandling($e);
+            return $response;
+        }
+    }
+
+/**
+ * Change the boleto due date
+ * @param  int $transaction The Monetizze Transaction Code
+ * @param  date $newDueDate  The New due date in Y-m-d format
+ * @return result     
+ */
+public function changeBoletoDueDate($transaction, $newDueDate)
+{
+    $token = $this->authenticate();
+        // Now Lets Grab The Specific Transaction
+    try {
+        $data = [
+            'headers' => ['TOKEN' => $token],
+            'form_params' => ['data' => json_encode(['transaction' => $transaction, 'data_vencimento' => $newDueDate])],
+        ];
+        $response = $this->client->post('boleto', $data);
+        return json_decode($response->getBody()->getContents());
+    } catch (RequestException $e) {
+        $response = $this->statusCodeHandling($e);
+        return $response;
+    }
+}
+
+    /**
+     * Handle The Error
+     * @param  Exception $e
+     * @return array    Result
+     */
     protected function statusCodeHandling($e)
     {
         $response = [
