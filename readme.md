@@ -1,4 +1,4 @@
-Monetizze Api 2.1 PHP-SDK (EM DESENVOLVIMENTO)
+Monetizze Api 2.1 PHP-SDK
 =================
 
 SDK não-oficial de integração á API da Monetizze
