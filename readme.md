@@ -47,6 +47,22 @@ $transacoes = $monetizze->getTransactionsByEmail("email@cliente.com");
 ```
 
 
+Transaçoes por Filtro Avançado
+--------
+
+```php
+// Buscar Transacoes por um filtro avançado
+$filters = [
+    'product'  => '123455',
+    'date_min' => '2018-01-01 00:00:00',
+    'date_max' => '2018-04-01 23:59:59',
+    'status[]' => ['2','3','4','5','6'] // 2 - Finalizada 3 - Cancelada 4 - Devolvida 5 - Bloqueada 6 - Completa
+];
+$transacoes = $monetizze->getTransactionsByAdvancedFilter($filters);
+
+```
+
+
 Boletos
 ------------
 
