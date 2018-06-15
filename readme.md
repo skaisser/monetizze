@@ -27,7 +27,7 @@ $monetizze = new ApiMonetizze('SUA_API_KEY_MONETIZZE');
 
 ```
 
-Transacoes
+Transações
 --------
 
 ```php
@@ -37,7 +37,7 @@ $detalhesTransacao = $monetizze->getTransactionDetails(12312312);
 ```
 
 
-Transaçoes por Clientes
+Transações por Clientes
 --------
 
 ```php
@@ -47,7 +47,7 @@ $transacoes = $monetizze->getTransactionsByEmail("email@cliente.com");
 ```
 
 
-Transaçoes por Filtro Avançado
+Transações por Filtro Avançado
 --------
 
 ```php
@@ -60,10 +60,9 @@ $filters = [
 ];
 $transacoes = $monetizze->getTransactionsByAdvancedFilter($filters);
 
-Para ver todas as opções de filtro visite [aqui](http://api.monetizze.com.br/2.1/apidoc/#api-Geral-Transactions)
-
 ```
 
+Para checar todas as opções de filtro visite a [documentação oficial](http://api.monetizze.com.br/2.1/apidoc/#api-Geral-Transactions).
 
 Boletos
 ------------
