@@ -31,13 +31,15 @@ class ApiMonetizze
     protected function authenticate()
     {
         try {
-            $headers = ['headers' => ['X_CONSUMER_KEY' => $this->apiKey]];
-            $response = $this->client->get('token', $headers);
-            $result = json_decode($response->getBody()->getContents());
+            $headers     = ['headers' => ['X_CONSUMER_KEY' => $this->apiKey]];
+            $response    = $this->client->get('token', $headers);
+            $result      = json_decode($response->getBody()->getContents());
             $this->token = $result->token;
+
             return $result->token;
         } catch (RequestException $e) {
             $response = $this->statusCodeHandling($e);
+
             return $response;
         }
     }
@@ -55,9 +57,11 @@ class ApiMonetizze
                 'headers' => ['TOKEN' => $token],
             ];
             $response = $this->client->get("transactions?transaction=$transactionId", $data);
+
             return json_decode($response->getBody()->getContents());
         } catch (RequestException $e) {
             $response = $this->statusCodeHandling($e);
+
             return $response;
         }
     }
@@ -75,9 +79,36 @@ class ApiMonetizze
                 'headers' => ['TOKEN' => $token],
             ];
             $response = $this->client->get("transactions?email=$email", $data);
+
             return json_decode($response->getBody()->getContents());
         } catch (RequestException $e) {
             $response = $this->statusCodeHandling($e);
+
+            return $response;
+        }
+    }
+
+    /**
+     * Get The transactions by the product code
+     *
+     * @param  array $arrFilter Filters Options for search to see all filter options visit: http://api.monetizze.com.br/2.1/apidoc/#api-Geral-Transactions
+     * @return \StdClass        Result of Filter
+     */
+    public function getTransactionsByAdvancedFilter(array $arrFilter)
+    {
+        $token = $this->authenticate();
+        try {
+            $filter = http_build_query($arrFilter);
+            $data   = [
+                'headers' => ['TOKEN' => $token],
+            ];
+
+            $response = $this->client->get("transactions?$filter", $data);
+
+            return json_decode($response->getBody()->getContents());
+        } catch (RequestException $e) {
+            $response = $this->statusCodeHandling($e);
+
             return $response;
         }
     }
@@ -92,39 +123,43 @@ class ApiMonetizze
         $token = $this->authenticate();
         try {
             $data = [
-                'headers' => ['TOKEN' => $token],
+                'headers'     => ['TOKEN' => $token],
                 'form_params' => ['data' => json_encode([['codLog' => 1, 'transaction' => $transaction, 'trackingCode' => $trackingCode]])],
             ];
             $response = $this->client->post('sales/tracking', $data);
+
             return json_decode($response->getBody()->getContents());
         } catch (RequestException $e) {
             $response = $this->statusCodeHandling($e);
+
             return $response;
         }
     }
 
-/**
- * Change the boleto due date
- * @param  int $transaction The Monetizze Transaction Code
- * @param  date $newDueDate  The New due date in Y-m-d format
- * @return result     
- */
-public function changeBoletoDueDate($transaction, $newDueDate)
-{
-    $token = $this->authenticate();
+    /**
+     * Change the boleto due date
+     * @param  int $transaction The Monetizze Transaction Code
+     * @param  date $newDueDate  The New due date in Y-m-d format
+     * @return result
+     */
+    public function changeBoletoDueDate($transaction, $newDueDate)
+    {
+        $token = $this->authenticate();
         // Now Lets Grab The Specific Transaction
-    try {
-        $data = [
-            'headers' => ['TOKEN' => $token],
+        try {
+            $data = [
+            'headers'     => ['TOKEN' => $token],
             'form_params' => ['data' => json_encode(['transaction' => $transaction, 'data_vencimento' => $newDueDate])],
         ];
-        $response = $this->client->post('boleto', $data);
-        return json_decode($response->getBody()->getContents());
-    } catch (RequestException $e) {
-        $response = $this->statusCodeHandling($e);
-        return $response;
+            $response = $this->client->post('boleto', $data);
+
+            return json_decode($response->getBody()->getContents());
+        } catch (RequestException $e) {
+            $response = $this->statusCodeHandling($e);
+
+            return $response;
+        }
     }
-}
 
     /**
      * Handle The Error
@@ -135,8 +170,9 @@ public function changeBoletoDueDate($transaction, $newDueDate)
     {
         $response = [
             'statuscode' => $e->getResponse()->getStatusCode(),
-            'error' => json_decode($e->getResponse()->getBody(true)->getContents())
+            'error'      => json_decode($e->getResponse()->getBody(true)->getContents())
         ];
+
         return $response;
     }
 }
