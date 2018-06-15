@@ -56,9 +56,11 @@ $filters = [
     'product'  => '123455',
     'date_min' => '2018-01-01 00:00:00',
     'date_max' => '2018-04-01 23:59:59',
-    'status[]' => ['2','3','4','5','6'] // 2 - Finalizada 3 - Cancelada 4 - Devolvida 5 - Bloqueada 6 - Completa
+    'status'   => ['2','3','4','5','6'] // 2 - Finalizada 3 - Cancelada 4 - Devolvida 5 - Bloqueada 6 - Completa
 ];
 $transacoes = $monetizze->getTransactionsByAdvancedFilter($filters);
+
+Para ver todas as opções de filtro visite [aqui](http://api.monetizze.com.br/2.1/apidoc/#api-Geral-Transactions)
 
 ```
 
