@@ -27,7 +27,7 @@ $monetizze = new ApiMonetizze('SUA_API_KEY_MONETIZZE');
 
 ```
 
-Transacoes
+Transações
 --------
 
 ```php
@@ -37,7 +37,7 @@ $detalhesTransacao = $monetizze->getTransactionDetails(12312312);
 ```
 
 
-Transaçoes por Clientes
+Transações por Clientes
 --------
 
 ```php
@@ -46,6 +46,23 @@ $transacoes = $monetizze->getTransactionsByEmail("email@cliente.com");
 
 ```
 
+
+Transações por Filtro Avançado
+--------
+
+```php
+// Buscar Transacoes por um filtro avançado
+$filters = [
+    'product'  => '123455',
+    'date_min' => '2018-01-01 00:00:00',
+    'date_max' => '2018-04-01 23:59:59',
+    'status'   => ['2','3','4','5','6'] // 2 - Finalizada 3 - Cancelada 4 - Devolvida 5 - Bloqueada 6 - Completa
+];
+$transacoes = $monetizze->getTransactionsByAdvancedFilter($filters);
+
+```
+
+Para checar todas as opções de filtro visite a [documentação oficial](http://api.monetizze.com.br/2.1/apidoc/#api-Geral-Transactions).
 
 Boletos
 ------------
