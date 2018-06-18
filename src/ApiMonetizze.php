@@ -52,6 +52,10 @@ class ApiMonetizze
     public function getTransactionDetails($transactionId)
     {
         $token = $this->authenticate();
+        if (!is_string($token)) {
+            return $token;
+        }
+
         try {
             $data = [
                 'headers' => ['TOKEN' => $token],
@@ -74,6 +78,10 @@ class ApiMonetizze
     public function getTransactionsByEmail($email)
     {
         $token = $this->authenticate();
+        if (!is_string($token)) {
+            return $token;
+        }
+
         try {
             $data = [
                 'headers' => ['TOKEN' => $token],
@@ -97,6 +105,10 @@ class ApiMonetizze
     public function getTransactionsByAdvancedFilter(array $arrFilter)
     {
         $token = $this->authenticate();
+        if (!is_string($token)) {
+            return $token;
+        }
+
         try {
             $filter = http_build_query($arrFilter);
             $data   = [
@@ -121,6 +133,10 @@ class ApiMonetizze
     public function addCorreiosTrackingNumber($transaction, $trackingCode)
     {
         $token = $this->authenticate();
+        if (!is_string($token)) {
+            return $token;
+        }
+
         try {
             $data = [
                 'headers'     => ['TOKEN' => $token],
@@ -145,12 +161,16 @@ class ApiMonetizze
     public function changeBoletoDueDate($transaction, $newDueDate)
     {
         $token = $this->authenticate();
+        if (!is_string($token)) {
+            return $token;
+        }
+
         // Now Lets Grab The Specific Transaction
         try {
             $data = [
-            'headers'     => ['TOKEN' => $token],
-            'form_params' => ['data' => json_encode(['transaction' => $transaction, 'data_vencimento' => $newDueDate])],
-        ];
+                'headers'     => ['TOKEN' => $token],
+                'form_params' => ['data' => json_encode(['transaction' => $transaction, 'data_vencimento' => $newDueDate])],
+            ];
             $response = $this->client->post('boleto', $data);
 
             return json_decode($response->getBody()->getContents());
@@ -168,9 +188,9 @@ class ApiMonetizze
      */
     protected function statusCodeHandling($e)
     {
-        $response = [
-            'statuscode' => $e->getResponse()->getStatusCode(),
-            'error'      => json_decode($e->getResponse()->getBody(true)->getContents())
+        $response = (object) [
+            'status' => $e->getResponse()->getStatusCode(),
+            'error'  => json_decode($e->getResponse()->getBody(true)->getContents())
         ];
 
         return $response;
