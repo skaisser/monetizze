@@ -25,6 +25,9 @@ use Skaisser\Monetizze\ApiMonetizze;
 
 $monetizze = new ApiMonetizze('SUA_API_KEY_MONETIZZE');
 
+//or
+$monetizze = new ApiMonetizze();
+$monetizze->setApiKey('SUA_API_KEY_MONETIZZE');
 ```
 
 Transações

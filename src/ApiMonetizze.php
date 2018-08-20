@@ -16,11 +16,21 @@ class ApiMonetizze
     /**
      * Constructor
      *
-     * @param  string            $consumerKey  (optional) Chave para acesso a API
+     * @param  string  $apiKey  (optional) Chave para acesso a API
      */
-    public function __construct($apiKey)
+    public function __construct($apiKey = null)
     {
         $this->client = new Client(['base_uri' => SELF::API_URL]);
+        $this->apiKey = $apiKey;
+    }
+
+    /**
+     * Seta ou atualiza a apiKey que sera usada durante a comunicacao com a monetizze
+     *
+     * @param string $apiKey Chave para acesso a API
+     */
+    public function setApiKey(string $apiKey)
+    {
         $this->apiKey = $apiKey;
     }
 
